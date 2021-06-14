@@ -1,9 +1,14 @@
 <template>
-  <div>
+  <div class="container">
     <Header />
     <Nuxt />
     <Footer />
   </div>
 </template>
-
-<style></style>
+<style>
+.container {
+  background-color: #000000;
+  height: 100%;
+  color: #ffffff;
+}
+</style>

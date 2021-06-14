@@ -1,0 +1,53 @@
+@import "@/assets/scss/mixin.scss";
+
+@include mobile {
+  .movie__info {
+    &--title {
+      font-size: 0.5rem;
+      font-weight: 600;
+    }
+    &--overview {
+      font-size: 0.25rem;
+    }
+    &--vote-average {
+      font-size: 0.25rem;
+    }
+  }
+}
+
+@include tablet {
+  .movie__info {
+    &--title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    &--overview {
+      font-size: 0.5rem;
+    }
+    &--vote-average {
+      font-size: 0.5rem;
+    }
+  }
+}
+
+@include desktop {
+  .movie__info {
+    &--title {
+      font-size: 2rem;
+      font-weight: 600;
+    }
+    &--overview {
+      font-size: 1rem;
+    }
+    &--vote-average {
+      font-size: 1rem;
+    }
+  }
+}
+
+.movie__info {
+  position: absolute;
+  text-align: left;
+  left: 0;
+  bottom: 1rem;
+}

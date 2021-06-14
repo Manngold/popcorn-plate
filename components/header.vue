@@ -1,6 +1,6 @@
 <template>
   <header class="container__header">
-    <h1>here is header</h1>
+    <h1>Movie Plate</h1>
   </header>
 </template>
 
@@ -8,4 +8,9 @@
 export default {};
 </script>
 
-<style scoped></style>
+<style scoped>
+.container__header {
+  margin-bottom: 2rem;
+  padding-top: 1rem;
+}
+</style>

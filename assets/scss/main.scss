@@ -1,0 +1,15 @@
+@import "bootstrap/scss/bootstrap.scss";
+@import "bootstrap-vue/src/index.scss";
+@import "@/assets/scss/variable.scss";
+@import "@/assets/scss/mixin.scss";
+@import "@/assets/scss/b-card.scss";
+@import "@/assets/scss/b-skeleton.scss";
+@import "@/assets/scss/b-aspect.scss";
+@import "@/assets/scss/carousel.scss";
+
+#__layout {
+  background-color: $black;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}

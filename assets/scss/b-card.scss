@@ -1,0 +1,7 @@
+.card {
+  border: none;
+  &-body {
+    background-color: $black;
+    border: none;
+  }
+}
