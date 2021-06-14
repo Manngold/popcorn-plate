@@ -1,20 +1,13 @@
 # movie-app
 
-## Build Setup
+Nuxt.js를 활용한 간단한 영화 정보 사이트
 
-```bash
-# install dependencies
-$ yarn install
+## To Do List
 
-# serve with hot reload at localhost:3000
-$ yarn dev
-
-# build for production and launch server
-$ yarn build
-$ yarn start
-
-# generate static project
-$ yarn generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+- [x] Main carousel
+  - [x] data fetch
+  - [x] add responsive style
+- [ ] large card
+- [ ] small card
+- [ ] movie detail page
+- [ ] etc
