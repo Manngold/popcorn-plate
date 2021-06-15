@@ -43,7 +43,7 @@ export default {
   bootstrapVue: {
     bootstrapCSS: false,
     bootstrapVueCSS: false,
-    componentPlugins: ["SkeletonPlugin", "CarouselPlugin"],
+    componentPlugins: ["SkeletonPlugin", "CarouselPlugin", "CardPlugin"],
     directivePlugins: [],
     components: [],
     directives: []

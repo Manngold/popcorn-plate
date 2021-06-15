@@ -15,7 +15,7 @@ export default {
   computed: {
     slideImageUrl() {
       const path = this.movie.backdrop_path;
-      return `https://image.tmdb.org/t/p/original/${path}`;
+      return `https://image.tmdb.org/t/p/original${path}`;
     },
     movieOverview() {
       const overview = this.movie.overview.slice(0, 200);

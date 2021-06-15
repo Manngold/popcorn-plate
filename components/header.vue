@@ -1,6 +1,11 @@
 <template>
   <header class="container__header">
-    <h1>Movie Plate</h1>
+    <h1>Popcorn Plate</h1>
+    <img
+      class="container__image--logo"
+      src="@/assets/svg/popcorn.svg"
+      alt="logo"
+    />
   </header>
 </template>
 
@@ -8,9 +13,16 @@
 export default {};
 </script>
 
-<style scoped>
-.container__header {
-  margin-bottom: 2rem;
-  padding-top: 1rem;
+<style lang="scss" scoped>
+.container {
+  &__header {
+    display: flex;
+    align-content: center;
+    padding-top: 1rem;
+  }
+  &__image--logo {
+    width: 2rem;
+    height: 2rem;
+  }
 }
 </style>
