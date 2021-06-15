@@ -7,7 +7,12 @@ Nuxt.js를 활용한 간단한 영화 정보 사이트
 - [x] Main carousel
   - [x] data fetch
   - [x] add responsive style
-- [ ] large card
-- [ ] small card
+- [x] movie list, movie card
+  - [x] data fetch
+  - [x] add responsive style
 - [ ] movie detail page
+  - [ ] movie detail
+  - [ ] recommendation
+  - [ ] comment
 - [ ] etc
+  - [ ] store 활용하기
