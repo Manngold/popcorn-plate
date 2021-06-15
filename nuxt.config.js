@@ -42,7 +42,11 @@ export default {
 
   bootstrapVue: {
     bootstrapCSS: false,
-    bootstrapVueCSS: false
+    bootstrapVueCSS: false,
+    componentPlugins: ["SkeletonPlugin", "CarouselPlugin"],
+    directivePlugins: [],
+    components: [],
+    directives: []
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
