@@ -1,8 +1,6 @@
 <template>
   <div class="container__card-slide">
-    <div v-for="movie of movies" :key="movie.id">
-      <Card :movie="movie" />
-    </div>
+    <Card v-for="movie of movies" :key="movie.id" :movie="movie" />
   </div>
 </template>
 
@@ -19,5 +17,6 @@ export default {
   }
   overflow: auto;
   white-space: nowrap;
+  margin-top: 2rem;
 }
 </style>

@@ -1,13 +1,15 @@
 <template #img>
-  <b-carousel-slide :img-src="slideImageUrl">
-    <div class="movie__info">
-      <span class="movie__info--title">{{ movie.title }}</span>
-      <p class="movie__info--overview">{{ movieOverview }}</p>
-      <span class="movie__info--vote-average"
-        >🍿 {{ movie.vote_average }} / 10</span
-      >
-    </div>
-  </b-carousel-slide>
+  <NuxtLink :to="`/movie/${movie.id}`">
+    <b-carousel-slide :img-src="slideImageUrl">
+      <div class="movie__info">
+        <span class="movie__info--title">{{ movie.title }}</span>
+        <p class="movie__info--overview">{{ movieOverview }}</p>
+        <span class="movie__info--vote-average"
+          >🍿 {{ movie.vote_average }} / 10</span
+        >
+      </div>
+    </b-carousel-slide>
+  </NuxtLink>
 </template>
 <script>
 export default {

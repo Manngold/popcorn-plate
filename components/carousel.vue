@@ -17,13 +17,12 @@
         @sliding-start="onSlideStart"
         @sliding-end="onSlideEnd"
       >
-        <div
+        <CarouselSlide
           class="carousel-slide__container"
           v-for="movie of movies"
           :key="movie.id"
-        >
-          <CarouselSlide :movie="movie" />
-        </div>
+          :movie="movie"
+        />
       </b-carousel>
     </div>
   </div>
