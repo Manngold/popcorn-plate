@@ -18,28 +18,36 @@
 
 <script>
 export default {
-  data() {
-    return {
-      nowPlaying: [],
-      topRated: [],
-      upcoming: []
-    };
+  computed: {
+    nowPlaying() {
+      return this.$store.state.movieList.nowPlaying;
+    },
+    topRated() {
+      return this.$store.state.movieList.topRated;
+    },
+    upcoming() {
+      return this.$store.state.movieList.upcoming;
+    }
   },
   async fetch() {
-    const nowPlaying = await fetch(
-      `${process.env.apiBaseUrl}/movie/now_playing?api_key=${process.env.apiKey}`
-    ).then(res => res.json());
-    this.nowPlaying = nowPlaying.results;
-
-    const topRated = await fetch(
-      `${process.env.apiBaseUrl}/movie/top_rated?api_key=${process.env.apiKey}`
-    ).then(res => res.json());
-    this.topRated = topRated.results;
-
-    const upcoming = await fetch(
-      `${process.env.apiBaseUrl}/movie/upcoming?api_key=${process.env.apiKey}`
-    ).then(res => res.json());
-    this.upcoming = upcoming.results;
+    if (this.nowPlaying.length === 0) {
+      const response = await fetch(
+        `${process.env.apiBaseUrl}/movie/now_playing?api_key=${process.env.apiKey}`
+      ).then(res => res.json());
+      this.$store.commit("movieList/setNowPlaying", response.results);
+    }
+    if (this.topRated.length === 0) {
+      const response = await fetch(
+        `${process.env.apiBaseUrl}/movie/top_rated?api_key=${process.env.apiKey}`
+      ).then(res => res.json());
+      this.$store.commit("movieList/setTopRated", response.results);
+    }
+    if (this.upcoming.length === 0) {
+      const response = await fetch(
+        `${process.env.apiBaseUrl}/movie/upcoming?api_key=${process.env.apiKey}`
+      ).then(res => res.json());
+      this.$store.commit("movieList/setUpcoming", response.results);
+    }
   }
 };
 </script>

@@ -35,19 +35,22 @@ export default {
       slide: 0,
       sliding: null,
       cardAmount: 5,
-      movies: [],
       skeletonLoading: true
     };
   },
+  computed: {
+    movies() {
+      return this.$store.state.movieList.popular;
+    }
+  },
   async fetch() {
-    const response = await fetch(
-      `${process.env.apiBaseUrl}/movie/popular?api_key=${process.env.apiKey}`
-    ).then(res => res.json());
-    const { results } = response;
-
-    for (const movie of results) {
-      if (this.movies.length === this.cardAmount) break;
-      this.movies.push(movie);
+    if (this.movies.length === 0) {
+      const response = await fetch(
+        `${process.env.apiBaseUrl}/movie/popular?api_key=${process.env.apiKey}`
+      ).then(res => res.json());
+      const { results: movies } = response;
+      const { cardAmount } = this;
+      this.$store.commit("movieList/setPopular", { cardAmount, movies });
     }
   },
 
