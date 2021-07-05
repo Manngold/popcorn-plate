@@ -17,36 +17,35 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   computed: {
     nowPlaying() {
-      return this.$store.state.movieList.nowPlaying;
+      return this.$store.state.movieList.nowPlaying.movies;
     },
     topRated() {
-      return this.$store.state.movieList.topRated;
+      return this.$store.state.movieList.topRated.movies;
     },
     upcoming() {
-      return this.$store.state.movieList.upcoming;
+      return this.$store.state.movieList.upcoming.movies;
     }
+  },
+  methods: {
+    ...mapActions({
+      fetchNowPlaying: "movieList/fetchNowPlaying",
+      fetchTopRated: "movieList/fetchTopRated",
+      fetchUpcoming: "movieList/fetchUpcoming"
+    })
   },
   async fetch() {
     if (this.nowPlaying.length === 0) {
-      const response = await fetch(
-        `${process.env.apiBaseUrl}/movie/now_playing?api_key=${process.env.apiKey}`
-      ).then(res => res.json());
-      this.$store.commit("movieList/setNowPlaying", response.results);
+      await this.fetchNowPlaying();
     }
     if (this.topRated.length === 0) {
-      const response = await fetch(
-        `${process.env.apiBaseUrl}/movie/top_rated?api_key=${process.env.apiKey}`
-      ).then(res => res.json());
-      this.$store.commit("movieList/setTopRated", response.results);
+      await this.fetchTopRated();
     }
     if (this.upcoming.length === 0) {
-      const response = await fetch(
-        `${process.env.apiBaseUrl}/movie/upcoming?api_key=${process.env.apiKey}`
-      ).then(res => res.json());
-      this.$store.commit("movieList/setUpcoming", response.results);
+      await this.fetchUpcoming();
     }
   }
 };

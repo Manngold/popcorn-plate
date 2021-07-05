@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   data() {
     return {
@@ -43,14 +45,10 @@ export default {
       return this.$store.state.movieList.popular;
     }
   },
+
   async fetch() {
     if (this.movies.length === 0) {
-      const response = await fetch(
-        `${process.env.apiBaseUrl}/movie/popular?api_key=${process.env.apiKey}`
-      ).then(res => res.json());
-      const { results: movies } = response;
-      const { cardAmount } = this;
-      this.$store.commit("movieList/setPopular", { cardAmount, movies });
+      await this.fetchPopular(this.cardAmount);
     }
   },
 
@@ -60,7 +58,8 @@ export default {
     },
     onSlideEnd(slide) {
       this.sliding = false;
-    }
+    },
+    ...mapActions({ fetchPopular: "movieList/fetchPopular" })
   }
 };
 </script>
