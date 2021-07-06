@@ -3,32 +3,28 @@
     <Carousel />
     <h2>Now Playing</h2>
     <section class="container__movies--nowPlaying">
-      <CardList :movies="nowPlaying" />
+      <CardList :movies="nowPlaying.movies" />
     </section>
     <h2>Top Rated</h2>
     <section class="container__movies--topRated">
-      <CardList :movies="topRated" />
+      <CardList :movies="topRated.movies" />
     </section>
     <h2>Upcoming</h2>
     <section class="container__movies--upcoming">
-      <CardList :movies="upcoming" />
+      <CardList :movies="upcoming.movies" />
     </section>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   computed: {
-    nowPlaying() {
-      return this.$store.state.movieList.nowPlaying.movies;
-    },
-    topRated() {
-      return this.$store.state.movieList.topRated.movies;
-    },
-    upcoming() {
-      return this.$store.state.movieList.upcoming.movies;
-    }
+    ...mapGetters({
+      nowPlaying: "movieList/getNowPlaying",
+      topRated: "movieList/getTopRated",
+      upcoming: "movieList/getUpcoming"
+    })
   },
   methods: {
     ...mapActions({
@@ -37,14 +33,15 @@ export default {
       fetchUpcoming: "movieList/fetchUpcoming"
     })
   },
+
   async fetch() {
-    if (this.nowPlaying.length === 0) {
+    if (this.nowPlaying.movies.length === 0) {
       await this.fetchNowPlaying();
     }
-    if (this.topRated.length === 0) {
+    if (this.topRated.movies.length === 0) {
       await this.fetchTopRated();
     }
-    if (this.upcoming.length === 0) {
+    if (this.upcoming.movies.length === 0) {
       await this.fetchUpcoming();
     }
   }

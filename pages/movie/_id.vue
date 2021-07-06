@@ -1,31 +1,36 @@
 <template>
   <div class="container__movie-detail">
-    <Detail :movie="movieDetail" />
+    <Detail :movieId="id" />
     <h2>Recommendations 🍿</h2>
     <section class="container__movies--recommendations">
-      <CardList :movies="recommendations" />
+      <CardList :movies="recommendations.movies" />
     </section>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+
 export default {
   data() {
     return {
-      id: this.$route.params.id,
-      movieDetail: {},
-      recommendations: []
+      id: this.$route.params.id
     };
   },
+  computed: {
+    ...mapGetters({
+      recommendations: "movieList/getRecommendations"
+    })
+  },
+  methods: {
+    ...mapActions({
+      fetchRecommendations: "movieList/fetchRecommendations"
+    })
+  },
   async fetch() {
-    this.movieDetail = await fetch(
-      `${process.env.apiBaseUrl}/movie/${this.id}?api_key=${process.env.apiKey}`
-    ).then(res => res.json());
-
-    const recommendations = await fetch(
-      `${process.env.apiBaseUrl}/movie/${this.id}/recommendations?api_key=${process.env.apiKey}`
-    ).then(res => res.json());
-    this.recommendations = recommendations.results;
+    if (this.recommendations.movies.length === 0) {
+      await this.fetchRecommendations(this.id, 1);
+    }
   }
 };
 </script>

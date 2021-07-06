@@ -18,13 +18,26 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
-  props: ["movie"],
+  props: ["movieId"],
   computed: {
+    ...mapGetters({
+      movie: "movieDetail/getMovieDetail"
+    }),
     cardImageUrl() {
       const path = this.movie.poster_path;
       return `https://image.tmdb.org/t/p/w500${path}`;
     }
+  },
+  methods: {
+    ...mapActions({
+      fetchMovieDetail: "movieDetail/fetchMovieDetail"
+    })
+  },
+  async fetch() {
+    await this.fetchMovieDetail(this.movieId);
   }
 };
 </script>
