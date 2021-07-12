@@ -6,15 +6,19 @@
 
 <script>
 export default {
-  props: ["movies"],
+  props: ["movies", "fetchMovies", "movieId"],
   methods: {
-    infinityScroll(event) {
+    async infinityScroll(event) {
       const {
         target: { scrollWidth, offsetWidth, scrollLeft }
       } = event;
       const pageWidth = scrollWidth - offsetWidth;
       if (pageWidth == scrollLeft) {
-        console.log("end!");
+        if (this.movieId) {
+          await this.fetchMovies(this.movieId);
+        } else {
+          await this.fetchMovies();
+        }
       }
     }
   }

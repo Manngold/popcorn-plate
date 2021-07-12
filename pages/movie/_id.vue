@@ -3,7 +3,11 @@
     <Detail :movieId="id" />
     <h2>Recommendations 🍿</h2>
     <section class="container__movies--recommendations">
-      <CardList :movies="recommendations.movies" />
+      <CardList
+        :movies="recommendations.movies"
+        :fetchMovies="fetchRecommendations"
+        :movieId="id"
+      />
     </section>
   </div>
 </template>
@@ -28,9 +32,7 @@ export default {
     })
   },
   async fetch() {
-    if (this.recommendations.movies.length === 0) {
-      await this.fetchRecommendations(this.id, 1);
-    }
+    await this.fetchRecommendations(this.id);
   }
 };
 </script>

@@ -1,9 +1,9 @@
 import axios from "axios";
 export const state = () => ({
-  nowPlaying: { page: 1, movies: [] },
-  topRated: { page: 1, movies: [] },
-  upcoming: { page: 1, movies: [] },
-  recommendations: { page: 1, movies: [] },
+  nowPlaying: { page: 0, movies: [] },
+  topRated: { page: 0, movies: [] },
+  upcoming: { page: 0, movies: [] },
+  recommendations: { page: 0, movies: [] },
   popular: []
 });
 
@@ -38,6 +38,10 @@ export const mutations = {
   setRecommendations(state, movies) {
     state.recommendations.movies = [...state.recommendations.movies, ...movies];
   },
+  setPage(state, target) {
+    if (state[target].page === 100) return;
+    state[target].page += 1;
+  },
   setPopular(state, movieInfo) {
     const { cardAmount, movies } = movieInfo;
     for (const movie of movies) {
@@ -48,7 +52,11 @@ export const mutations = {
 };
 
 export const actions = {
-  async fetchNowPlaying({ commit }, page) {
+  async fetchNowPlaying({ state, commit }) {
+    commit("setPage", "nowPlaying");
+    const {
+      nowPlaying: { page }
+    } = state;
     const response = await axios.get(
       `${process.env.apiBaseUrl}/movie/now_playing?page=${page}&api_key=${process.env.apiKey}`
     );
@@ -56,7 +64,11 @@ export const actions = {
       commit("setNowPlaying", response.data.results);
     }
   },
-  async fetchTopRated({ commit }, page) {
+  async fetchTopRated({ state, commit }) {
+    commit("setPage", "topRated");
+    const {
+      topRated: { page }
+    } = state;
     const response = await axios.get(
       `${process.env.apiBaseUrl}/movie/top_rated?page=${page}&api_key=${process.env.apiKey}`
     );
@@ -64,7 +76,11 @@ export const actions = {
       commit("setTopRated", response.data.results);
     }
   },
-  async fetchUpcoming({ commit }, page) {
+  async fetchUpcoming({ state, commit }) {
+    commit("setPage", "upcoming");
+    const {
+      upcoming: { page }
+    } = state;
     const response = await axios.get(
       `${process.env.apiBaseUrl}/movie/upcoming?page=${page}&api_key=${process.env.apiKey}`
     );
@@ -72,8 +88,11 @@ export const actions = {
       commit("setUpcoming", response.data.results);
     }
   },
-  async fetchRecommendations({ commit, state }, id) {
-    const page = state.recommendations.page;
+  async fetchRecommendations({ state, commit }, id) {
+    commit("setPage", "recommendations");
+    const {
+      recommendations: { page }
+    } = state;
     const response = await axios.get(
       `${process.env.apiBaseUrl}/movie/${id}/recommendations?page=${page}&api_key=${process.env.apiKey}`
     );

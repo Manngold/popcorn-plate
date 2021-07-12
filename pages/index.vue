@@ -3,15 +3,16 @@
     <Carousel />
     <h2>Now Playing</h2>
     <section class="container__movies--nowPlaying">
-      <CardList :movies="nowPlaying.movies" />
+      <CardList :movies="nowPlaying.movies" :fetchMovies="fetchNowPlaying" />
+      <div v-if="$fetchState.pending">loading</div>
     </section>
     <h2>Top Rated</h2>
     <section class="container__movies--topRated">
-      <CardList :movies="topRated.movies" />
+      <CardList :movies="topRated.movies" :fetchMovies="fetchTopRated" />
     </section>
     <h2>Upcoming</h2>
     <section class="container__movies--upcoming">
-      <CardList :movies="upcoming.movies" />
+      <CardList :movies="upcoming.movies" :fetchMovies="fetchUpcoming" />
     </section>
   </div>
 </template>
@@ -35,15 +36,9 @@ export default {
   },
 
   async fetch() {
-    if (this.nowPlaying.movies.length === 0) {
-      await this.fetchNowPlaying();
-    }
-    if (this.topRated.movies.length === 0) {
-      await this.fetchTopRated();
-    }
-    if (this.upcoming.movies.length === 0) {
-      await this.fetchUpcoming();
-    }
+    await this.fetchNowPlaying();
+    await this.fetchTopRated();
+    await this.fetchUpcoming();
   }
 };
 </script>

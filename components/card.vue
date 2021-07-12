@@ -1,6 +1,6 @@
 <template>
   <NuxtLink :to="`/movie/${movie.id}`" class="movie--link">
-    <b-card overlay :img-src="cardImageUrl" img-alt="Card Image">
+    <b-card overlay :img-src="cardImageUrl">
       <div class="container__movie-info">
         <span class="container__movie-info--title">{{ movie.title }}</span>
         <span class="container__movie-info--score"
@@ -17,6 +17,7 @@ export default {
   computed: {
     cardImageUrl() {
       const path = this.movie.poster_path;
+      if (!path) return require("../assets/svg/popcorn.svg");
       return `https://image.tmdb.org/t/p/w500${path}`;
     },
     fixedScore() {
